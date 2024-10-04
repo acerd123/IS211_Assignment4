@@ -1,6 +1,4 @@
 import argparse
-# other imports go here
-
 import random
 import time
 
@@ -49,7 +47,7 @@ def python_sort(a_list):
 def benchmark_sort(the_size):
     """Benchmark sorting algorithms on random lists of size the_size."""
     
-    # Python Sort
+    
     total_time = 0
     for _ in range(100):
         mylist = get_me_random_list(the_size)
@@ -60,7 +58,7 @@ def benchmark_sort(the_size):
     avg_time = total_time / 100
     print(f"Python sort took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
 
-    # Insertion Sort
+    
     total_time = 0
     for _ in range(100):
         mylist = get_me_random_list(the_size)
@@ -71,7 +69,7 @@ def benchmark_sort(the_size):
     avg_time = total_time / 100
     print(f"Insertion sort took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
 
-    # Shell Sort
+    
     total_time = 0
     for _ in range(100):
         mylist = get_me_random_list(the_size)
