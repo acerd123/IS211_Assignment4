@@ -44,7 +44,6 @@ def ordered_sequential_search(a_list, item):
 
 def binary_search_iterative(a_list,item):
     first = 0
-
     last = len(a_list) - 1
     found = False
     while first <= last and not found:
@@ -72,36 +71,64 @@ def binary_search_recursive(a_list,item):
                 return binary_search_recursive(a_list[:midpoint], item)
             else:
                 return binary_search_recursive(a_list[midpoint + 1:], item)
-
-
-if __name__ == "__main__":
-    """Main entry point"""
-    the_size = 500
-
+            
+def benchmark_search(the_size):
+    
     total_time = 0
-    for i in range(100):
+    for _ in range(100):
         mylist = get_me_random_list(the_size)
-        # sorting is not needed for sequential search.
-        mylist = sorted(mylist)
-
+        mylist = sorted(mylist)  # Sorting for binary search
         start = time.time()
-        check = binary_search_iterative(mylist, 99999999)
+        check = binary_search_iterative(mylist, 99999999)  # Search for a non-existent item
         time_spent = time.time() - start
         total_time += time_spent
 
     avg_time = total_time / 100
     print(f"Binary Search Iterative took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
 
+    # Ordered Sequential Search
     total_time = 0
-    for i in range(100):
+    for _ in range(100):
         mylist = get_me_random_list(the_size)
-        # sorting is not needed for sequential search.
-        mylist = sorted(mylist)
-
+        mylist = sorted(mylist)  # Sorting for ordered search
         start = time.time()
-        check = ordered_sequential_search(mylist, 99999999)
+        check = ordered_sequential_search(mylist, 99999999)  # Search for a non-existent item
         time_spent = time.time() - start
         total_time += time_spent
 
     avg_time = total_time / 100
-    print(f"Ordered sequential took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
+    print(f"Ordered Sequential Search took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
+
+    # Sequential Search (no sorting needed)
+    total_time = 0
+    for _ in range(100):
+        mylist = get_me_random_list(the_size)
+        start = time.time()
+        check = sequential_search(mylist, 99999999)  # Search for a non-existent item
+        time_spent = time.time() - start
+        total_time += time_spent
+
+    avg_time = total_time / 100
+    print(f"Sequential Search took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
+
+    # Binary Search Recursive
+    total_time = 0
+    for _ in range(100):
+        mylist = get_me_random_list(the_size)
+        mylist = sorted(mylist)  # Sorting for binary search
+        start = time.time()
+        check = binary_search_recursive(mylist, 99999999)  # Search for a non-existent item
+        time_spent = time.time() - start
+        total_time += time_spent
+
+    avg_time = total_time / 100
+    print(f"Binary Search Recursive took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
+
+if __name__ == "__main__":
+    """Main entry point."""
+    # Define list sizes for benchmarking
+    list_sizes = [500, 1000, 5000]
+
+    for size in list_sizes:
+        print(f"\nBenchmarking for list size: {size}")
+        benchmark_search(size)
